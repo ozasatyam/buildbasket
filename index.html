@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Build Basket - Premium Tiles at Competitive Prices</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f4f6f7;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(44, 62, 80, 0.95);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 70px;
+            filter: brightness(2);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--secondary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 152, 219, 0.7)), url('images/background.jpg') center/cover no-repeat;
+            /* background-image: "images/background.jpg"); */
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .hero-text h1 span {
+            color: var(--secondary-color);
+            display: block;
+            font-size: 5rem;
+        }
+
+        .hero-text .tagline {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-text .description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Unique Selling Proposition */
+        .usp {
+            background-color: var(--light-bg);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .usp h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .usp-tagline {
+            font-size: 1rem;
+            letter-spacing: 5px;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .usp-text {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        .stat-box {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            width: 220px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-box h3 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+            font-weight: 800;
+        }
+
+        .stat-box p {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            opacity: 0.7;
+        }
+        .tile-specs {
+            list-style-type: none;
+            padding: 10px 0;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: left;
+        }
+        
+        .tile-specs li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .tile-specs li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .product-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .product-item img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .product-item h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .product-item p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        /* Featured Product */
+        .featured {
+            padding: 80px 0;
+            background: url('images/feature3.jpg') bottom/cover no-repeat;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .featured::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+        }
+
+        .featured-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .featured-product {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 30px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+
+        .featured-product h3 {
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .featured-product p {
+            margin-bottom: 15px;
+        }
+
+        /* Product Range */
+        .product-range {
+            padding: 80px 0;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #ccc;
+            font-size: 18px;
+        }
+
+        .product-showcase {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .product-item {
+            background-color: #444;
+            padding: 30px;
+            border-radius: 5px;
+            margin: 15px;
+            text-align: center;
+            width: 250px;
+            position: relative;
+        }
+
+        .product-item img {
+            width: 100%;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .product-item h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .product-item p {
+            color: #ccc;
+            font-size: 16px;
+        }
+
+        /* Applications Area */
+        .applications {
+            padding: 80px 0;
+            background-color: #f5f5f5;
+        }
+
+        .app-list {
+            display: flex;
+            flex-direction: column;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .app-item {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px 30px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .app-item:hover {
+            transform: translateX(10px);
+        }
+
+        .app-icon {
+            margin-right: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .app-name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            padding: 80px 0;
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+        }
+
+        .benefits {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefit {
+            width: 300px;
+            margin: 20px;
+            padding: 30px;
+            background-color: #333;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .benefit:hover {
+            transform: translateY(-10px);
+        }
+
+        .benefit-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .benefit h3 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 0;
+            background-color: #f5f5f5;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            width: 48%;
+            min-width: 300px;
+        }
+
+        .contact-item {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .contact-icon {
+            font-size: 24px;
+            margin-right: 20px;
+            color: #333;
+        }
+
+        .contact-details h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .map {
+            width: 48%;
+            min-width: 300px;
+            height: 300px;
+            background-color: #ddd;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            width: 30%;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #fff;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+
+        .footer-links li a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: #555;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 14px;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        .btn-light {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .btn-light:hover {
+            background-color: #eee;
+        }
+
+        /* Price Tag Highlight */
+        .price-tag {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-text {
+                width: 60%;
+            }
+
+            .hero-image {
+                width: 35%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                padding: 80px 0;
+            }
+
+            .hero-text {
+                width: 100%;
+                padding: 0 20px;
+                text-align: center;
+            }
+
+            .hero-image {
+                display: none;
+            }
+
+            .stat-box {
+                width: 45%;
+            }
+
+            .contact-info,
+            .map {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+
+            .footer-column {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            nav ul {
+                display: none;
+            }
+
+            .stat-box {
+                width: 100%;
+            }
+
+            .product-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="images/logo3.png" alt="The Build Basket Logo">
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Catalogue</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>TILES THAT <span>WOW..!</span></h1>
+                    <p class="tagline">AFFORDABLE LUXURY</p>
+                    <p class="description">
+                        Elevate your spaces with premium quality tiles that combine
+                        exceptional design and unbeatable value. Transform your
+                        environment without compromising your budget.
+                    </p>
+                    <a href="#products" class="hero-cta">Explore Collection</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unique Selling Proposition -->
+    <section class="usp">
+        <div class="container">
+            <h2>Build To Impress</h2>
+            <p class="usp-tagline">AFFORDABLE EXCELLENCE</p>
+            <p class="usp-text">
+                At The Build Basket, we bring you premium quality tiles at the most competitive prices in the market.
+                Our tiles aren't just functional, they're works of art that allow you to transform your spaces into
+                stunning showcases.
+                With Livenza Tiles, every space becomes extraordinary, leaving an unforgettable impression.
+            </p>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-icon">📐</div>
+                    <h3>12+</h3>
+                    <p>Sizes</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">🗂️</div>
+                    <h3>10+</h3>
+                    <p>Categories</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">🖌️</div>
+                    <h3>15+</h3>
+                    <p>Surface Finishes</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">🏆</div>
+                    <h3>1000+</h3>
+                    <p>Designs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Product -->
+    <section class="featured">
+        <div class="container featured-content">
+            <div class="featured-product">
+                <h3>The Wonders Of Nature</h3>
+                <p>600×1200mm GVT/PGVT</p>
+                <div class="price-tag">Special Price: ₹XX/sq.ft</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Range -->
+    <section class="product-range" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Comprehensive Tile Dimensions</h2>
+                <p>Precise Sizes for Perfect Installations</p>
+            </div>
+
+            <div class="product-showcase">
+                <div class="product-item">
+                    <img src="images/feature1.jpg" alt="600×1200mm Tiles">
+                    <h3>600×1200mm</h3>
+                    <p>Versatile Medium Format</p>
+                    <ul class="tile-specs">
+                        <li>Perfect for floors and walls</li>
+                        <li>Ideal for residential and commercial spaces</li>
+                        <li>Easy to install and maintain</li>
+                    </ul>
+                    <div class="price-tag">Best Price!</div>
+                </div>
+                <div class="product-item">
+                    <img src="images/feature2.jpg" alt="800×800mm Tiles">
+                    <h3>800×800mm</h3>
+                    <p>Contemporary Square Format</p>
+                    <ul class="tile-specs">
+                        <li>Spacious square design</li>
+                        <li>Minimalist aesthetic</li>
+                        <li>Suitable for modern interiors</li>
+                    </ul>
+                    <div class="price-tag">Best Price!</div>
+                </div>
+                <div class="product-item">
+                    <img src="images/tiles2.jpg" alt="1200×2400mm Tiles">
+                    <h3>1200×2400mm</h3>
+                    <p>Expansive Large Format</p>
+                    <ul class="tile-specs">
+                        <li>Extra-large slabs with minimal joints</li>
+                        <li>Dramatic, seamless look</li>
+                        <li>Ideal for feature walls and expansive areas</li>
+                    </ul>
+                    <div class="price-tag">Best Price!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications Area -->
+    <section class="applications">
+        <div class="container">
+            <div class="section-title">
+                <h2>Area Of Applications</h2>
+                <p>Perfect tiles for every space</p>
+            </div>
+
+            <div class="app-list">
+                <div class="app-item">
+                    <div class="app-icon">🏠</div>
+                    <div class="app-name">Residence</div>
+                </div>
+                <div class="app-item">
+                    <div class="app-icon">🏢</div>
+                    <div class="app-name">Commercial</div>
+                </div>
+                <div class="app-item">
+                    <div class="app-icon">🏞️</div>
+                    <div class="app-name">Exterior</div>
+                </div>
+                <div class="app-item">
+                    <div class="app-icon">🛍️</div>
+                    <div class="app-name">Mall</div>
+                </div>
+                <div class="app-item">
+                    <div class="app-icon">✈️</div>
+                    <div class="app-name">Airport</div>
+                </div>
+                <div class="app-item">
+                    <div class="app-icon">🅿️</div>
+                    <div class="app-name">Parking</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose The Build Basket</h2>
+                <p>We offer the best value for your investment</p>
+            </div>
+
+            <div class="benefits">
+                <div class="benefit">
+                    <div class="benefit-icon">💰</div>
+                    <h3>Best Prices</h3>
+                    <p>We offer the most competitive prices in the market without compromising on quality.</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🏆</div>
+                    <h3>Premium Quality</h3>
+                    <p>All our tiles undergo rigorous quality checks to ensure durability and perfection.</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🛒</div>
+                    <h3>Huge Selection</h3>
+                    <p>Browse through our extensive collection to find the perfect match for your space.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>We're here to help you build your dream</p>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h3>Store Address</h3>
+                            <p>123 Tile Avenue, Building Zone</p>
+                            <p>Cityville, State 12345</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h3>Email Us</h3>
+                            <p>info@thebuiildbasket.com</p>
+                            <p>sales@thebuiildbasket.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h3>Call Us</h3>
+                            <p>Sales: +91 1234567890</p>
+                            <p>Support: +91 0987654321</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map">
+                    <!-- Map placeholder -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <img src="/images/logo3.png" alt="The Build Basket Logo">
+                    <p>Help To Build Your Dream</p>
+                    <p>Premium quality tiles at the most competitive prices in the market.</p>
+
+                    <div class="social-links">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Products</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Floor Tiles</a></li>
+                        <li><a href="#">Wall Tiles</a></li>
+                        <li><a href="#">Outdoor Tiles</a></li>
+                        <li><a href="#">Designer Tiles</a></li>
+                        <li><a href="#">Kitchen Tiles</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2025 The Build Basket. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
