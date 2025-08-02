@@ -76,6 +76,21 @@
                 <a href="#work" class="text-gray-300 hover:text-white">Our Work</a>
                 <a href="#contact" class="text-gray-300 hover:text-white">Contact</a>
             </nav>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden absolute right-0 mt-2 w-48 bg-black/80 backdrop-blur-sm rounded-md shadow-lg">
+            <a href="#hero" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700/50">Home</a>
+            <a href="#products" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700/50">Products</a>
+            <a href="#categories" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700/50">Categories</a>
+            <a href="#why-us" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700/50">Why Us</a>
+            <a href="#work" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700/50">Our Work</a>
+            <a href="#contact" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700/50">Contact</a>
         </div>
     </header>
 
@@ -114,7 +129,7 @@
     <section id="categories" class="section bg-black">
         <div class="section-content w-full max-w-7xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-12" data-aos="fade-up">Explore by Category.</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                 <div class="image-card group relative flex flex-col items-center justify-center h-96" style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up" data-aos-delay="100">
                     <img src="https://img.icons8.com/ios/50/ffffff/ruler.png" alt="Size icon" class="h-16 w-16 mb-4">
                     <h3 class="text-2xl font-semibold text-white">12+ size</h3>
@@ -140,7 +155,7 @@
         <img src="images/feature3.jpg" alt="Architectural detail" class="section-bg">
         <div class="section-content" data-aos="fade-up">
             <h2 class="text-4xl md:text-5xl font-bold mb-12" data-aos="fade-up">Why BuildBasket?</h2>
-            <div class="grid md:grid-cols-3 gap-12 text-left">
+            <div class="grid md:grid-cols-3 gap-12 text-left sm:grid-cols-1">
                 <div data-aos="fade-up" data-aos-delay="100">
                     <h3 class="text-2xl font-semibold mb-4">For Every Project</h3>
                     <p class="text-gray-300">We cater to both commercial and residential clients, delivering tailored solutions for any scale. From a single room to a large-scale development, we have you covered.</p>
@@ -164,7 +179,7 @@
             <p class="text-lg text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="100">We let our work and our clients speak for us.</p>
 
             <!-- Stats -->
-            <div id="stats-container" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mb-20" data-aos="fade-up" data-aos-delay="200">
+            <div id="stats-container" class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center mb-20" data-aos="fade-up" data-aos-delay="200">
                 <div data-aos="fade-up" data-aos-delay="300">
                     <h3 class="text-5xl font-bold" id="happy-clients">5</h3>
                     <p class="text-lg text-gray-300 mt-2">Happy Clients</p>
@@ -180,7 +195,7 @@
             </div>
 
             <!-- Gallery -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="image-card group relative" data-aos="fade-up" data-aos-delay="600">
                     <img src="images/modern house.jpg" alt="Project 1" class="w-full h-96 object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -318,6 +333,13 @@
         }, { threshold: 0.1 });
 
         observer.observe(document.getElementById('stats-container'));
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
     </script>
 
 </body>
