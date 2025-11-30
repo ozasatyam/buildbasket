@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BuildBasket offers premium tiles, porcelain, ceramic, marble, and stone for residential and commercial projects. Experience elegance and durability.">
     <title>BuildBasket - Premium Tiles</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +52,9 @@
 
         .header.scrolled {
             background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .image-card {
@@ -60,16 +63,108 @@
         }
 
         .image-card img {
-            transition: transform 0.4s ease;
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .image-card:hover img {
             transform: scale(1.05);
         }
+
+        @keyframes slow-zoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        
+        .animate-slow-zoom {
+            animation: slow-zoom 20s linear infinite alternate;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        body:hover .cursor-outline {
+            width: 50px;
+            height: 50px;
+        }
+        
+        /* Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Text Reveal Mask */
+        .reveal-text {
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+        
+        .reveal-text span {
+            display: block;
+            transform: translateY(100%);
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal-text.active span {
+            transform: translateY(0);
+        }
+
+        /* Hide Scrollbar */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Smooth text rendering */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            cursor: none; /* Hide default cursor */
+        }
     </style>
 </head>
 
 <body class="antialiased">
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
 
     <!-- Header -->
     <header id="header" class="header bg-transparent fixed w-full z-50 py-4">
@@ -87,7 +182,7 @@
                 <a href="#contact" class="text-gray-300 hover:text-white">Contact</a>
             </nav>
             <div class="md:hidden">
-                <button id="menu-btn" class="text-white">
+                <button id="menu-btn" class="text-white" aria-label="Toggle mobile menu">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -97,7 +192,7 @@
             </div>
         </div>
         <div id="mobile-menu"
-            class="hidden md:hidden absolute right-0 mt-2 w-48 bg-black/80 backdrop-blur-sm rounded-md shadow-lg">
+            class="md:hidden absolute right-0 mt-2 w-48 bg-black/80 backdrop-blur-sm rounded-md shadow-lg opacity-0 invisible scale-95 transition-all duration-300 origin-top-right">
             <a href="#hero" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700/50">Home</a>
             <a href="#products" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700/50">Products</a>
             <a href="#categories" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700/50">Categories</a>
@@ -108,148 +203,218 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="hero" class="section">
-        <img src="images/background.jpg" alt="Living room with modern tiles" class="section-bg">
-        <div class="section-content" data-aos="fade-up">
-            <h1 class="text-5xl md:text-7xl font-bold mb-4">The Art of Tile.</h1>
-            <p class="text-xl md:text-2xl text-gray-200">Redefining your space with elegance and durability.</p>
+    <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+        <div class="absolute inset-0 overflow-hidden">
+            <img src="images/background.jpg" alt="Living room with modern tiles" class="w-full h-full object-cover opacity-60 animate-slow-zoom">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black"></div>
+        </div>
+        <div class="relative z-10 text-center max-w-5xl mx-auto px-6" data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="text-6xl md:text-8xl font-semibold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
+                The Art of Tile.
+            </h1>
+            <p class="text-2xl md:text-3xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed mb-10">
+                Redefining your space with elegance and durability.
+            </p>
+            <div>
+                <a href="#products" class="inline-block px-8 py-4 rounded-full bg-white text-black font-medium text-lg hover:bg-gray-200 transition-all hover:scale-105">
+                    View Collection
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section id="products-container" class="relative bg-black">
-        <div id="sticky-wrapper" class="h-[300vh] relative">
-            <div class="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-                <div id="product-canvas" class="relative w-full h-full">
-                    <img id="product-image-1" src="images/tiles3.jpg" alt="Modern kitchen with stylish tiles"
-                        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500">
-                    <img id="product-image-2" src="images/tiles1.jpg" alt="Marble Tiles"
-                        class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500">
+    <!-- Materiality Section (Replaces Products) -->
+    <section id="products" class="bg-black py-20">
+        <div class="container mx-auto px-6">
+             <div class="flex flex-col md:flex-row gap-8 h-auto md:h-[80vh]">
+                <!-- Card 1 -->
+                <div class="relative flex-1 group overflow-hidden rounded-3xl cursor-pointer">
+                    <img src="images/tiles3.jpg" alt="Porcelain & Ceramic" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-10 w-full">
+                        <h3 class="text-4xl md:text-5xl font-bold mb-4 transform translate-y-0 transition-transform duration-500">Porcelain & Ceramic</h3>
+                        <p class="text-gray-300 text-lg opacity-0 transform translate-y-10 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 max-w-md">
+                            Engineered for perfection. The ideal balance of durability and modern aesthetics for any space.
+                        </p>
+                        <div class="mt-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                            <span class="inline-flex items-center text-white font-semibold border-b border-white pb-1">View Collection <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div id="product-text"
-            class="absolute top-0 left-0 w-full h-full flex flex-col justify-around z-10 pointer-events-none">
-            <div class="text-white text-center max-w-2xl mx-auto p-8">
-                <h3 class="text-4xl font-bold">Porcelain & Ceramic</h3>
-                <p class="text-xl mt-4">Unmatched versatility and beauty. Our tiles are crafted to perfection, offering
-                    a timeless foundation for any interior design.</p>
-            </div>
-            <div class="text-white text-center max-w-2xl mx-auto p-8">
-                <h3 class="text-4xl font-bold">Marble & Stone</h3>
-                <p class="text-xl mt-4">Experience the luxury of natural stone. Each tile is a unique piece of art,
-                    bringing organic elegance to your home.</p>
+
+                <!-- Card 2 -->
+                <div class="relative flex-1 group overflow-hidden rounded-3xl cursor-pointer mt-8 md:mt-0">
+                    <img src="images/tiles1.jpg" alt="Marble & Stone" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40">
+                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-10 w-full">
+                        <h3 class="text-4xl md:text-5xl font-bold mb-4 transform translate-y-0 transition-transform duration-500">Marble & Stone</h3>
+                        <p class="text-gray-300 text-lg opacity-0 transform translate-y-10 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100 max-w-md">
+                            Earth's masterpiece. Unique veining and organic textures that bring nature's luxury indoors.
+                        </p>
+                         <div class="mt-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                            <span class="inline-flex items-center text-white font-semibold border-b border-white pb-1">View Collection <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Categories Section -->
-    <section id="categories" class="section bg-black">
-        <div class="section-content w-full max-w-7xl">
-            <h2 class="text-4xl md:text-5xl font-bold mb-12" data-aos="fade-up">Explore by Category.</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="image-card group relative flex flex-col items-center justify-center h-96"
-                    style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up"
-                    data-aos-delay="100">
-                    <img src="https://img.icons8.com/ios/50/ffffff/ruler.png" alt="Size icon" class="h-16 w-16 mb-4">
-                    <h3 class="text-2xl font-semibold text-white">12+ size</h3>
+    <section id="categories" class="py-32 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-7xl font-semibold mb-6 tracking-tight" data-aos="fade-up">Explore by Category.</h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Find the perfect match for your vision.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto h-auto lg:h-[600px]">
+                <!-- Card 1: Large Vertical (Spans 2 rows on large screens if we wanted, but let's keep columns for now, maybe make first one wider? No, standard grid is safer for now, just rich images) -->
+                
+                <!-- Card 1 -->
+                <div class="group relative h-80 lg:h-full bg-zinc-900 rounded-3xl overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <img src="images/tiles2.jpg" alt="Size category" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-60 transition-opacity duration-500"></div>
+                    <div class="relative z-10 flex flex-col h-full justify-end p-8">
+                        <div class="mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <img src="https://img.icons8.com/ios/50/ffffff/ruler.png" alt="Size icon" class="h-10 w-10 mb-4 invert opacity-80">
+                            <h3 class="text-3xl font-semibold text-white mb-2">12+ Sizes</h3>
+                            <p class="text-gray-300 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">From mosaic details to large format statements.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="image-card group relative flex flex-col items-center justify-center h-96"
-                    style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up"
-                    data-aos-delay="200">
-                    <img src="https://img.icons8.com/ios/50/ffffff/medium-icons.png" alt="Category icon"
-                        class="h-16 w-16 mb-4">
-                    <h3 class="text-2xl font-semibold text-white">10+ category</h3>
+
+                <!-- Card 2 -->
+                <div class="group relative h-80 lg:h-full bg-zinc-900 rounded-3xl overflow-hidden cursor-pointer lg:mt-12" data-aos="fade-up" data-aos-delay="200">
+                     <img src="images/feature1.jpg" alt="Category variety" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-60 transition-opacity duration-500"></div>
+                    <div class="relative z-10 flex flex-col h-full justify-end p-8">
+                         <div class="mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                             <img src="https://img.icons8.com/ios/50/ffffff/medium-icons.png" alt="Category icon" class="h-10 w-10 mb-4 invert opacity-80">
+                            <h3 class="text-3xl font-semibold text-white mb-2">10+ Categories</h3>
+                            <p class="text-gray-300 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">Curated specifically for every room type.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="image-card group relative flex flex-col items-center justify-center h-96"
-                    style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up"
-                    data-aos-delay="300">
-                    <img src="https://img.icons8.com/ios/50/ffffff/surface.png" alt="Surface icon"
-                        class="h-16 w-16 mb-4">
-                    <h3 class="text-2xl font-semibold text-white">15+ Surface</h3>
+
+                <!-- Card 3 -->
+                <div class="group relative h-80 lg:h-full bg-zinc-900 rounded-3xl overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="300">
+                    <img src="images/tiles3.jpg" alt="Surface textures" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700">
+                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-60 transition-opacity duration-500"></div>
+                    <div class="relative z-10 flex flex-col h-full justify-end p-8">
+                        <div class="mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <img src="https://img.icons8.com/ios/50/ffffff/surface.png" alt="Surface icon" class="h-10 w-10 mb-4 invert opacity-80">
+                            <h3 class="text-3xl font-semibold text-white mb-2">15+ Surfaces</h3>
+                            <p class="text-gray-300 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">Matte, gloss, satin, and textured finishes.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="image-card group relative flex flex-col items-center justify-center h-96"
-                    style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up"
-                    data-aos-delay="400">
-                    <img src="https://img.icons8.com/ios/50/ffffff/design.png" alt="Design icon" class="h-16 w-16 mb-4">
-                    <h3 class="text-2xl font-semibold text-white">1500+ Design</h3>
+
+                <!-- Card 4 -->
+                <div class="group relative h-80 lg:h-full bg-zinc-900 rounded-3xl overflow-hidden cursor-pointer lg:mt-12" data-aos="fade-up" data-aos-delay="400">
+                    <img src="images/tile.jpg" alt="Design variations" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700">
+                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-60 transition-opacity duration-500"></div>
+                    <div class="relative z-10 flex flex-col h-full justify-end p-8">
+                         <div class="mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <img src="https://img.icons8.com/ios/50/ffffff/design.png" alt="Design icon" class="h-10 w-10 mb-4 invert opacity-80">
+                            <h3 class="text-3xl font-semibold text-white mb-2">1500+ Designs</h3>
+                            <p class="text-gray-300 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">Endless possibilities for your unique style.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Us Section -->
-    <section id="why-us" class="section">
-        <img src="images/feature3.jpg" alt="Architectural detail" class="section-bg">
-        <div class="section-content" data-aos="fade-up">
-            <h2 class="text-4xl md:text-5xl font-bold mb-12" data-aos="fade-up">Why BuildBasket?</h2>
-            <div class="grid md:grid-cols-3 gap-12 text-left sm:grid-cols-1">
-                <div data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="text-2xl font-semibold mb-4">For Every Project</h3>
-                    <p class="text-gray-300">We cater to both commercial and residential clients, delivering tailored
-                        solutions for any scale. From a single room to a large-scale development, we have you covered.
+    <!-- Philosophy / Editorial Section -->
+    <section id="why-us" class="py-32 bg-black overflow-hidden">
+        <div class="container mx-auto px-6">
+            <!-- Item 1 -->
+            <div class="flex flex-col md:flex-row items-center gap-16 mb-32">
+                <div class="w-full md:w-1/2" data-aos="fade-right">
+                    <div class="overflow-hidden rounded-none md:rounded-r-3xl relative h-[600px]">
+                        <img src="images/feature3.jpg" alt="Architectural detail" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000 ease-out">
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 md:pl-12" data-aos="fade-up">
+                    <span class="text-blue-500 font-mono text-sm uppercase tracking-widest mb-4 block">01. The Foundation</span>
+                    <h2 class="text-5xl md:text-6xl font-semibold mb-8 leading-tight">Built for <br>Legacy.</h2>
+                    <p class="text-xl text-gray-400 leading-relaxed mb-8">
+                        We don't just sell tiles; we curate the ground you walk on. Our commercial and residential solutions are engineered to withstand time, traffic, and trends.
                     </p>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-white rounded-full mr-4"></span>High-traffic resilience
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-white rounded-full mr-4"></span>Zero-maintenance surfaces
+                        </li>
+                    </ul>
                 </div>
-                <div data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="text-2xl font-semibold mb-4">Unbeatable Value</h3>
-                    <p class="text-gray-300">Our promise is simple: the best quality tiles at the most competitive
-                        prices. We believe premium doesn't have to mean overpriced.</p>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="flex flex-col md:flex-row-reverse items-center gap-16">
+                <div class="w-full md:w-1/2" data-aos="fade-left">
+                    <div class="overflow-hidden rounded-none md:rounded-l-3xl relative h-[600px]">
+                        <img src="images/tiles1.jpg" alt="Marble texture" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000 ease-out">
+                    </div>
                 </div>
-                <div data-aos="fade-up" data-aos-delay="300">
-                    <h3 class="text-2xl font-semibold mb-4">Exceptional Support</h3>
-                    <p class="text-gray-300">Experience customer service that goes above and beyond. Our dedicated team
-                        is here to support you at every step, from selection to installation.</p>
+                <div class="w-full md:w-1/2 md:pr-12" data-aos="fade-up">
+                    <span class="text-blue-500 font-mono text-sm uppercase tracking-widest mb-4 block">02. The Aesthetic</span>
+                    <h2 class="text-5xl md:text-6xl font-semibold mb-8 leading-tight">Unapologetically <br>Beautiful.</h2>
+                    <p class="text-xl text-gray-400 leading-relaxed mb-8">
+                        Beauty is not an accident. It is designed. Our collections span from sleek, minimalist concrete to the raw elegance of natural marble.
+                    </p>
+                    <a href="#contact" class="text-white border-b border-white pb-1 hover:text-blue-400 hover:border-blue-400 transition-colors">Start your project &rarr;</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Our Work Section -->
-    <section id="work" class="section bg-black">
-        <div class="section-content w-full max-w-7xl">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4" data-aos="fade-up">Proven by Numbers.</h2>
-            <p class="text-lg text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="100">We let our work and our
-                clients speak for us.</p>
-
-            <!-- Stats -->
-            <div id="stats-container" class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center mb-20" data-aos="fade-up"
-                data-aos-delay="200">
-                <div data-aos="fade-up" data-aos-delay="300">
-                    <h3 class="text-5xl font-bold" id="happy-clients">5</h3>
-                    <p class="text-lg text-gray-300 mt-2">Happy Clients</p>
+    <!-- Selected Works Section -->
+    <section id="work" class="py-32 bg-zinc-950 border-t border-zinc-900">
+        <div class="container mx-auto px-6 mb-16 flex justify-between items-end">
+            <div>
+                <h2 class="text-4xl md:text-6xl font-semibold mb-4">Selected Works.</h2>
+                <p class="text-gray-400">Curated excellence across the globe.</p>
+            </div>
+            <div class="hidden md:flex gap-8">
+                 <div class="text-right">
+                    <h3 class="text-3xl font-bold text-white">05</h3>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest">Clients</p>
                 </div>
-                <div data-aos="fade-up" data-aos-delay="400">
-                    <h3 class="text-5xl font-bold" id="projects-completed">4</h3>
-                    <p class="text-lg text-gray-300 mt-2">Projects Completed</p>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="500">
-                    <h3 class="text-5xl font-bold" id="years-experience">2</h3>
-                    <p class="text-lg text-gray-300 mt-2">Years of Experience</p>
+                <div class="text-right">
+                    <h3 class="text-3xl font-bold text-white">04</h3>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest">Projects</p>
                 </div>
             </div>
+        </div>
 
-            <!-- Gallery -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="image-card group relative" data-aos="fade-up" data-aos-delay="600">
-                    <img src="images/modern house.jpg" alt="Project 1" class="w-full h-96 object-cover">
-                    <div
-                        class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <h3 class="text-2xl font-semibold text-white">Luxury Home</h3>
-                    </div>
+        <!-- Horizontal Scroll Gallery -->
+        <div id="work-gallery" class="flex overflow-x-auto pb-12 px-6 gap-8 hide-scrollbar" style="scrollbar-width: none; -ms-overflow-style: none;">
+            <!-- Card 1 -->
+            <div class="min-w-[85vw] md:min-w-[600px] h-[70vh] relative rounded-3xl overflow-hidden snap-center group flex-shrink-0">
+                <img src="images/modern house.jpg" alt="Luxury Home" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-10">
+                    <h3 class="text-3xl text-white font-bold mb-2">The Glass House</h3>
+                    <p class="text-gray-300">Residential &bull; 2024</p>
                 </div>
-                <div class="image-card group relative" data-aos="fade-up" data-aos-delay="700">
-                    <img src="images/bathroom.jpg" alt="Bathroom Space" class="w-full h-96 object-cover">
-                    <div
-                        class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <h3 class="text-2xl font-semibold text-white">Luxury Bathroom </h3>
-                    </div>
+            </div>
+             <!-- Card 2 -->
+            <div class="min-w-[85vw] md:min-w-[600px] h-[70vh] relative rounded-3xl overflow-hidden snap-center group flex-shrink-0">
+                <img src="images/bathroom.jpg" alt="Luxury Bathroom" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-10">
+                    <h3 class="text-3xl text-white font-bold mb-2">Onyx Sanctuary</h3>
+                    <p class="text-gray-300">Private Spa &bull; 2023</p>
                 </div>
-                <div class="image-card group relative" data-aos="fade-up" data-aos-delay="800">
-                    <img src="images/Commercial Space.jpg" alt="Project 3" class="w-full h-96 object-cover">
-                    <div
-                        class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <h3 class="text-2xl font-semibold text-white">Commercial Space</h3>
-                    </div>
+            </div>
+             <!-- Card 3 -->
+            <div class="min-w-[85vw] md:min-w-[600px] h-[70vh] relative rounded-3xl overflow-hidden snap-center group flex-shrink-0">
+                <img src="images/Commercial Space.jpg" alt="Commercial" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-10">
+                    <h3 class="text-3xl text-white font-bold mb-2">Tech Hub Lobby</h3>
+                    <p class="text-gray-300">Commercial &bull; 2024</p>
                 </div>
             </div>
         </div>
@@ -264,17 +429,17 @@
                 <form action="https://formspree.io/f/mdkqobed" method="POST">
                     <div class="mb-4">
                         <label for="name" class="block text-gray-400 text-sm font-bold mb-2">Name</label>
-                        <input type="name" id="name" name="name"
+                        <input type="text" id="name" name="name"
                             class="bg-gray-900 border border-gray-700 rounded w-full py-3 px-4 text-white leading-tight focus:outline-none focus:border-blue-500">
                     </div>
                     <div class="mb-4">
-                        <label for="email" class="block text-gray-400 text-sm font-bold mb-2" name="email">Email</label>
+                        <label for="email" class="block text-gray-400 text-sm font-bold mb-2">Email</label>
                         <input type="email" id="email" name="email"
                             class="bg-gray-900 border border-gray-700 rounded w-full py-3 px-4 text-white leading-tight focus:outline-none focus:border-blue-500">
                     </div>
                     <div class="mb-4">
-                        <label for="message" class="block text-gray-400 text-sm font-bold mb-2" name="message">Message</label>
-                        <textarea id="message" rows="4" name="message"
+                        <label for="message" class="block text-gray-400 text-sm font-bold mb-2">Message</label>
+                        <textarea id="message" name="message" rows="4"
                             class="bg-gray-900 border border-gray-700 rounded w-full py-3 px-4 text-white leading-tight focus:outline-none focus:border-blue-500"></textarea>
                     </div>
                     <input type="text" name="_honey" style="display:none">
@@ -289,14 +454,51 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-black text-white py-8">
-        <div class="container mx-auto px-6 text-center text-gray-500">
-            <p>&copy; 2025 BuildBasket. All rights reserved.</p>
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="#" class="text-gray-500 hover:text-white">Facebook</a>
-                <a href="#" class="text-gray-500 hover:text-white">Instagram</a>
-                <a href="#" class="text-gray-500 hover:text-white">Twitter</a>
+    <!-- Mega Footer -->
+    <footer class="bg-black text-white pt-32 pb-12 border-t border-zinc-900">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between mb-24">
+                <div class="mb-12 md:mb-0">
+                     <img src="images/logo3.png" alt="BuildBasket Logo" class="h-16 mb-8 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
+                     <h2 class="text-4xl font-bold max-w-xs leading-tight">Redefining spaces since 2023.</h2>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
+                    <div>
+                        <h4 class="text-gray-500 text-sm uppercase tracking-widest mb-6">Explore</h4>
+                        <ul class="space-y-4 text-lg text-gray-300">
+                            <li><a href="#" class="hover:text-white transition-colors">Collections</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Projects</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Studio</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Journal</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-gray-500 text-sm uppercase tracking-widest mb-6">Company</h4>
+                        <ul class="space-y-4 text-lg text-gray-300">
+                            <li><a href="#" class="hover:text-white transition-colors">About</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h4 class="text-gray-500 text-sm uppercase tracking-widest mb-6">Socials</h4>
+                        <ul class="space-y-4 text-lg text-gray-300">
+                            <li><a href="#" class="hover:text-white transition-colors">Instagram</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">LinkedIn</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Twitter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-zinc-900 text-gray-500 text-sm">
+                <p>&copy; 2025 BuildBasket. All rights reserved.</p>
+                <div class="flex space-x-8 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -306,6 +508,39 @@
         AOS.init({
             duration: 800,
             once: true,
+        });
+
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline follows with delay (using animation frame for smoothness or simple CSS transition)
+            // simpler approach with CSS transition already set on class
+            cursorOutline.style.left = `${posX}px`;
+            cursorOutline.style.top = `${posY}px`;
+            
+            // Hover effect on links
+            const hoverables = document.querySelectorAll('a, button, .image-card');
+            hoverables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorOutline.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                    cursorDot.style.opacity = '0';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorOutline.style.backgroundColor = 'transparent';
+                    cursorDot.style.opacity = '1';
+                });
+            });
         });
 
         const header = document.getElementById('header');
@@ -318,32 +553,39 @@
         });
 
         const stickyWrapper = document.getElementById('sticky-wrapper');
-        const productImage1 = document.getElementById('product-image-1');
-        const productImage2 = document.getElementById('product-image-2');
-        const productText = document.getElementById('product-text');
+        if(stickyWrapper) {
+             const productImage1 = document.getElementById('product-image-1');
+            const productImage2 = document.getElementById('product-image-2');
+            const productText = document.getElementById('product-text');
 
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY;
-            const stickyPosition = stickyWrapper.offsetTop;
-            const stickyHeight = stickyWrapper.offsetHeight;
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY;
+                const stickyPosition = stickyWrapper.offsetTop;
+                const stickyHeight = stickyWrapper.offsetHeight;
 
-            if (scrollPosition > stickyPosition && scrollPosition < stickyPosition + stickyHeight - window.innerHeight) {
-                const progress = (scrollPosition - stickyPosition) / (stickyHeight - window.innerHeight);
+                if (scrollPosition > stickyPosition && scrollPosition < stickyPosition + stickyHeight - window.innerHeight) {
+                    const progress = (scrollPosition - stickyPosition) / (stickyHeight - window.innerHeight);
 
-                // Animate the second image sliding in from the right
-                productImage2.style.transform = `translateX(${100 - (progress * 100)}%)`;
-                productImage2.style.opacity = 1;
+                    // Animate the second image sliding in from the right
+                    productImage2.style.transform = `translateX(${100 - (progress * 100)}%)`;
+                    productImage2.style.opacity = 1;
 
-                // Fade text in and out
-                productText.children[0].style.opacity = 1 - (progress * 2);
-                productText.children[1].style.opacity = (progress - 0.5) * 2;
+                    // Fade text in and out
+                    if(productText && productText.children.length > 1) {
+                        productText.children[0].style.opacity = 1 - (progress * 2);
+                        productText.children[1].style.opacity = (progress - 0.5) * 2;
+                    }
 
-            } else if (scrollPosition <= stickyPosition) {
-                productImage2.style.transform = 'translateX(100%)';
-                productText.children[0].style.opacity = 1;
-                productText.children[1].style.opacity = 0;
-            }
-        });
+                } else if (scrollPosition <= stickyPosition) {
+                    productImage2.style.transform = 'translateX(100%)';
+                    if(productText && productText.children.length > 1) {
+                         productText.children[0].style.opacity = 1;
+                        productText.children[1].style.opacity = 0;
+                    }
+                }
+            });
+        }
+       
 
         function animateValue(obj, start, end, duration) {
             let startTimestamp = null;
@@ -357,31 +599,63 @@
             };
             window.requestAnimationFrame(step);
         }
+        
+        // Ensure stats container exists before observing
+        const statsContainer = document.getElementById('stats-container');
+        if (statsContainer) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const happyClients = document.getElementById('happy-clients');
+                        const projectsCompleted = document.getElementById('projects-completed');
+                        const yearsExperience = document.getElementById('years-experience');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const happyClients = document.getElementById('happy-clients');
-                    const projectsCompleted = document.getElementById('projects-completed');
-                    const yearsExperience = document.getElementById('years-experience');
+                        if(happyClients) animateValue(happyClients, 0, 5, 1500);
+                        if(projectsCompleted) animateValue(projectsCompleted, 0, 4, 1500);
+                        if(yearsExperience) animateValue(yearsExperience, 0, 2, 1500);
 
-                    animateValue(happyClients, 0, 5, 1500);
-                    animateValue(projectsCompleted, 0, 4, 1500);
-                    animateValue(yearsExperience, 0, 2, 1500);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            observer.observe(statsContainer);
+        }
 
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        observer.observe(document.getElementById('stats-container'));
 
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
         menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+            const classes = ['opacity-0', 'invisible', 'scale-95', 'opacity-100', 'visible', 'scale-100'];
+            classes.forEach(cls => mobileMenu.classList.toggle(cls));
         });
+
+        // Horizontal Scroll Logic
+        const scrollContainer = document.getElementById('work-gallery');
+        if (scrollContainer) {
+            scrollContainer.addEventListener('wheel', (evt) => {
+                const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+                const buffer = 2; // Tolerance for calculation
+
+                if (evt.deltaY > 0) {
+                    // Scrolling Down -> Move Right
+                    // If we haven't reached the end, scroll horizontally
+                    if (scrollContainer.scrollLeft < maxScrollLeft - buffer) {
+                        evt.preventDefault();
+                        scrollContainer.scrollLeft += evt.deltaY * 2;
+                    }
+                    // If we are at the end, do nothing (allow default vertical scroll)
+                } else {
+                    // Scrolling Up -> Move Left
+                    // If we haven't reached the start, scroll horizontally
+                    if (scrollContainer.scrollLeft > buffer) {
+                        evt.preventDefault();
+                        scrollContainer.scrollLeft += evt.deltaY * 2;
+                    }
+                    // If we are at the start, do nothing (allow default vertical scroll)
+                }
+            }, { passive: false });
+        }
     </script>
 
 </body>
