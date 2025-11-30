@@ -167,13 +167,13 @@
     <div class="cursor-outline hidden md:block"></div>
 
     <!-- Header -->
-    <header id="header" class="header bg-transparent fixed w-full z-50 py-4">
+    <header id="header" class="header bg-transparent fixed w-full z-50 py-4 transition-all duration-500">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center">
-                <img src="images/logo3.png" alt="BuildBasket Logo" class="h-12 mr-3">
-                <span class="text-2xl font-semibold text-white">BuildBasket</span>
+                <img id="logo-img" src="images/logo3.png" alt="BuildBasket Logo" class="h-12 mr-3 transition-opacity duration-300">
+                <span id="brand-text" class="text-2xl font-semibold text-white transition-all duration-500">BuildBasket</span>
             </div>
-            <nav class="hidden md:flex space-x-8">
+            <nav id="main-nav" class="hidden md:flex space-x-8 transition-all duration-500">
                 <a href="#hero" class="text-gray-300 hover:text-white">Home</a>
                 <a href="#products" class="text-gray-300 hover:text-white">Products</a>
                 <a href="#categories" class="text-gray-300 hover:text-white">Categories</a>
@@ -182,7 +182,7 @@
                 <a href="#contact" class="text-gray-300 hover:text-white">Contact</a>
             </nav>
             <div class="md:hidden">
-                <button id="menu-btn" class="text-white" aria-label="Toggle mobile menu">
+                <button id="menu-btn" class="text-white transition-opacity duration-500" aria-label="Toggle mobile menu">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -544,13 +544,113 @@
         });
 
         const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        const nav = document.getElementById('main-nav');
+        const brandText = document.getElementById('brand-text');
+        const menuBtn = document.getElementById('menu-btn');
+        const logoImg = document.getElementById('logo-img');
+        
+        // Floating Logo Logic
+        let floatingLogo = null;
+        let logoRect = null;
+
+        function initFloatingLogo() {
+            if (floatingLogo) floatingLogo.remove();
+            
+            // Get initial position of the original logo
+            // We must ensure the header is in its "resting" state to get accurate coords
+            logoRect = logoImg.getBoundingClientRect();
+            
+            floatingLogo = logoImg.cloneNode(true);
+            floatingLogo.id = 'floating-logo';
+            floatingLogo.style.position = 'fixed';
+            floatingLogo.style.top = `${logoRect.top}px`;
+            floatingLogo.style.left = `${logoRect.left}px`;
+            floatingLogo.style.width = `${logoRect.width}px`;
+            floatingLogo.style.height = `${logoRect.height}px`;
+            floatingLogo.style.zIndex = '100';
+            floatingLogo.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+            floatingLogo.style.pointerEvents = 'none'; // Pass through clicks
+            floatingLogo.classList.remove('mr-3'); // Remove margin that might affect layout
+            
+            document.body.appendChild(floatingLogo);
+            
+            // Hide original
+            logoImg.style.opacity = '0';
+        }
+
+        // Initialize on load
+        if (logoImg.complete) {
+            initFloatingLogo();
+        } else {
+            logoImg.onload = initFloatingLogo;
+        }
+        
+        window.addEventListener('resize', () => {
+            // Reset to recalculate positions
+            logoImg.style.opacity = '1';
+            if(floatingLogo) {
+                floatingLogo.style.transition = 'none'; // Disable transition for resize
+                // We need to wait for layout update
+                requestAnimationFrame(() => {
+                     initFloatingLogo();
+                     // Re-apply state if scrolled
+                     if (window.scrollY > 50) updateScrollState();
+                });
             }
         });
+
+        function updateScrollState() {
+            if (!floatingLogo) return;
+
+            if (window.scrollY > 50) {
+                // Scrolled State
+                header.classList.remove('scrolled'); // Ensure no background
+                header.style.pointerEvents = 'none';
+                
+                // Hide Nav & Text
+                nav.classList.add('opacity-0', '-translate-y-10', 'pointer-events-none');
+                brandText.classList.add('opacity-0', '-translate-y-10');
+                menuBtn.classList.add('opacity-0');
+                
+                // Move Logo to Bottom Right
+                const targetLogoImageSize = 64; // Increased logo image size
+                const totalSizeWithPadding = targetLogoImageSize + (12 * 2); // 12px padding on each side
+                const margin = 30; // px
+                
+                floatingLogo.style.top = `${window.innerHeight - margin - totalSizeWithPadding}px`;
+                floatingLogo.style.left = `${window.innerWidth - margin - totalSizeWithPadding}px`;
+                floatingLogo.style.width = `${totalSizeWithPadding}px`;
+                floatingLogo.style.height = `${totalSizeWithPadding}px`;
+                floatingLogo.style.backgroundColor = 'white';
+                floatingLogo.style.borderRadius = '50%';
+                floatingLogo.style.padding = '12px'; // Padding around the image
+                floatingLogo.style.boxShadow = '0px 4px 15px rgba(0,0,0,0.2)'; // Optional: add a subtle shadow
+                
+            } else {
+                // Reset State
+                header.style.pointerEvents = 'auto';
+                
+                nav.classList.remove('opacity-0', '-translate-y-10', 'pointer-events-none');
+                brandText.classList.remove('opacity-0', '-translate-y-10');
+                menuBtn.classList.remove('opacity-0');
+                
+                // Remove background and padding
+                floatingLogo.style.backgroundColor = 'transparent';
+                floatingLogo.style.borderRadius = '0';
+                floatingLogo.style.padding = '0';
+                floatingLogo.style.boxShadow = 'none';
+
+                // Move Logo Back
+                if (logoRect) {
+                    floatingLogo.style.top = `${logoRect.top}px`;
+                    floatingLogo.style.left = `${logoRect.left}px`;
+                    floatingLogo.style.width = `${logoRect.width}px`;
+                    floatingLogo.style.height = `${logoRect.height}px`;
+                }
+            }
+        }
+
+        window.addEventListener('scroll', updateScrollState);
 
         const stickyWrapper = document.getElementById('sticky-wrapper');
         if(stickyWrapper) {
@@ -622,7 +722,6 @@
         }
 
 
-        const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
         menuBtn.addEventListener('click', () => {
