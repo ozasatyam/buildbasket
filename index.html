@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
             background-color: #000;
             color: #fff;
         }
+
         .section {
             min-height: 100vh;
             display: flex;
@@ -26,10 +28,12 @@
             padding: 6rem 2rem;
             text-align: center;
         }
+
         .section-content {
             max-width: 800px;
             z-index: 2;
         }
+
         .section-bg {
             position: absolute;
             top: 0;
@@ -40,25 +44,31 @@
             z-index: 1;
             opacity: 0.5;
         }
+
         .header {
             transition: background-color 0.3s ease;
         }
+
         .header.scrolled {
             background-color: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
         }
+
         .image-card {
             overflow: hidden;
             border-radius: 24px;
         }
+
         .image-card img {
             transition: transform 0.4s ease;
         }
+
         .image-card:hover img {
             transform: scale(1.05);
         }
     </style>
 </head>
+
 <body class="antialiased">
 
     <!-- Header -->
@@ -78,13 +88,16 @@
             </nav>
             <div class="md:hidden">
                 <button id="menu-btn" class="text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden absolute right-0 mt-2 w-48 bg-black/80 backdrop-blur-sm rounded-md shadow-lg">
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute right-0 mt-2 w-48 bg-black/80 backdrop-blur-sm rounded-md shadow-lg">
             <a href="#hero" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700/50">Home</a>
             <a href="#products" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700/50">Products</a>
             <a href="#categories" class="block py-2 px-4 text-sm text-gray-300 hover:bg-gray-700/50">Categories</a>
@@ -108,19 +121,24 @@
         <div id="sticky-wrapper" class="h-[300vh] relative">
             <div class="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
                 <div id="product-canvas" class="relative w-full h-full">
-                    <img id="product-image-1" src="images/tiles3.jpg" alt="Modern kitchen with stylish tiles" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500">
-                    <img id="product-image-2" src="images/tiles1.jpg" alt="Marble Tiles" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500">
+                    <img id="product-image-1" src="images/tiles3.jpg" alt="Modern kitchen with stylish tiles"
+                        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500">
+                    <img id="product-image-2" src="images/tiles1.jpg" alt="Marble Tiles"
+                        class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500">
                 </div>
             </div>
         </div>
-        <div id="product-text" class="absolute top-0 left-0 w-full h-full flex flex-col justify-around z-10 pointer-events-none">
+        <div id="product-text"
+            class="absolute top-0 left-0 w-full h-full flex flex-col justify-around z-10 pointer-events-none">
             <div class="text-white text-center max-w-2xl mx-auto p-8">
                 <h3 class="text-4xl font-bold">Porcelain & Ceramic</h3>
-                <p class="text-xl mt-4">Unmatched versatility and beauty. Our tiles are crafted to perfection, offering a timeless foundation for any interior design.</p>
+                <p class="text-xl mt-4">Unmatched versatility and beauty. Our tiles are crafted to perfection, offering
+                    a timeless foundation for any interior design.</p>
             </div>
             <div class="text-white text-center max-w-2xl mx-auto p-8">
                 <h3 class="text-4xl font-bold">Marble & Stone</h3>
-                <p class="text-xl mt-4">Experience the luxury of natural stone. Each tile is a unique piece of art, bringing organic elegance to your home.</p>
+                <p class="text-xl mt-4">Experience the luxury of natural stone. Each tile is a unique piece of art,
+                    bringing organic elegance to your home.</p>
             </div>
         </div>
     </section>
@@ -130,19 +148,29 @@
         <div class="section-content w-full max-w-7xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-12" data-aos="fade-up">Explore by Category.</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="image-card group relative flex flex-col items-center justify-center h-96" style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up" data-aos-delay="100">
+                <div class="image-card group relative flex flex-col items-center justify-center h-96"
+                    style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up"
+                    data-aos-delay="100">
                     <img src="https://img.icons8.com/ios/50/ffffff/ruler.png" alt="Size icon" class="h-16 w-16 mb-4">
                     <h3 class="text-2xl font-semibold text-white">12+ size</h3>
                 </div>
-                <div class="image-card group relative flex flex-col items-center justify-center h-96" style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://img.icons8.com/ios/50/ffffff/medium-icons.png" alt="Category icon" class="h-16 w-16 mb-4">
+                <div class="image-card group relative flex flex-col items-center justify-center h-96"
+                    style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up"
+                    data-aos-delay="200">
+                    <img src="https://img.icons8.com/ios/50/ffffff/medium-icons.png" alt="Category icon"
+                        class="h-16 w-16 mb-4">
                     <h3 class="text-2xl font-semibold text-white">10+ category</h3>
                 </div>
-                <div class="image-card group relative flex flex-col items-center justify-center h-96" style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up" data-aos-delay="300">
-                    <img src="https://img.icons8.com/ios/50/ffffff/surface.png" alt="Surface icon" class="h-16 w-16 mb-4">
+                <div class="image-card group relative flex flex-col items-center justify-center h-96"
+                    style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up"
+                    data-aos-delay="300">
+                    <img src="https://img.icons8.com/ios/50/ffffff/surface.png" alt="Surface icon"
+                        class="h-16 w-16 mb-4">
                     <h3 class="text-2xl font-semibold text-white">15+ Surface</h3>
                 </div>
-                 <div class="image-card group relative flex flex-col items-center justify-center h-96" style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up" data-aos-delay="400">
+                <div class="image-card group relative flex flex-col items-center justify-center h-96"
+                    style="background: linear-gradient(180deg, #0f172a, #1e293b);" data-aos="fade-up"
+                    data-aos-delay="400">
                     <img src="https://img.icons8.com/ios/50/ffffff/design.png" alt="Design icon" class="h-16 w-16 mb-4">
                     <h3 class="text-2xl font-semibold text-white">1500+ Design</h3>
                 </div>
@@ -158,15 +186,19 @@
             <div class="grid md:grid-cols-3 gap-12 text-left sm:grid-cols-1">
                 <div data-aos="fade-up" data-aos-delay="100">
                     <h3 class="text-2xl font-semibold mb-4">For Every Project</h3>
-                    <p class="text-gray-300">We cater to both commercial and residential clients, delivering tailored solutions for any scale. From a single room to a large-scale development, we have you covered.</p>
+                    <p class="text-gray-300">We cater to both commercial and residential clients, delivering tailored
+                        solutions for any scale. From a single room to a large-scale development, we have you covered.
+                    </p>
                 </div>
                 <div data-aos="fade-up" data-aos-delay="200">
                     <h3 class="text-2xl font-semibold mb-4">Unbeatable Value</h3>
-                    <p class="text-gray-300">Our promise is simple: the best quality tiles at the most competitive prices. We believe premium doesn't have to mean overpriced.</p>
+                    <p class="text-gray-300">Our promise is simple: the best quality tiles at the most competitive
+                        prices. We believe premium doesn't have to mean overpriced.</p>
                 </div>
                 <div data-aos="fade-up" data-aos-delay="300">
                     <h3 class="text-2xl font-semibold mb-4">Exceptional Support</h3>
-                    <p class="text-gray-300">Experience customer service that goes above and beyond. Our dedicated team is here to support you at every step, from selection to installation.</p>
+                    <p class="text-gray-300">Experience customer service that goes above and beyond. Our dedicated team
+                        is here to support you at every step, from selection to installation.</p>
                 </div>
             </div>
         </div>
@@ -176,10 +208,12 @@
     <section id="work" class="section bg-black">
         <div class="section-content w-full max-w-7xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-4" data-aos="fade-up">Proven by Numbers.</h2>
-            <p class="text-lg text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="100">We let our work and our clients speak for us.</p>
+            <p class="text-lg text-gray-400 mb-12" data-aos="fade-up" data-aos-delay="100">We let our work and our
+                clients speak for us.</p>
 
             <!-- Stats -->
-            <div id="stats-container" class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center mb-20" data-aos="fade-up" data-aos-delay="200">
+            <div id="stats-container" class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center mb-20" data-aos="fade-up"
+                data-aos-delay="200">
                 <div data-aos="fade-up" data-aos-delay="300">
                     <h3 class="text-5xl font-bold" id="happy-clients">5</h3>
                     <p class="text-lg text-gray-300 mt-2">Happy Clients</p>
@@ -198,19 +232,22 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="image-card group relative" data-aos="fade-up" data-aos-delay="600">
                     <img src="images/modern house.jpg" alt="Project 1" class="w-full h-96 object-cover">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <h3 class="text-2xl font-semibold text-white">Luxury Home</h3>
                     </div>
                 </div>
                 <div class="image-card group relative" data-aos="fade-up" data-aos-delay="700">
                     <img src="images/bathroom.jpg" alt="Bathroom Space" class="w-full h-96 object-cover">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <h3 class="text-2xl font-semibold text-white">Luxury Bathroom </h3>
                     </div>
                 </div>
                 <div class="image-card group relative" data-aos="fade-up" data-aos-delay="800">
                     <img src="images/Commercial Space.jpg" alt="Project 3" class="w-full h-96 object-cover">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <h3 class="text-2xl font-semibold text-white">Commercial Space</h3>
                     </div>
                 </div>
@@ -224,22 +261,26 @@
             <h2 class="text-4xl md:text-5xl font-bold mb-4">Get in Touch.</h2>
             <p class="text-lg text-gray-400 mb-8">Let's talk about your next project.</p>
             <div class="max-w-lg mx-auto text-left">
-                <form action="https://formsubmit.co/dhavaldeepsinh.rathod@thebuildbasket.com" method="POST" />
+                <form action="https://formspree.io/f/mdkqobed" method="POST">
                     <div class="mb-4">
                         <label for="name" class="block text-gray-400 text-sm font-bold mb-2">Name</label>
-                        <input type="text" id="name" class="bg-gray-900 border border-gray-700 rounded w-full py-3 px-4 text-white leading-tight focus:outline-none focus:border-blue-500">
+                        <input type="name" id="name" name="text"
+                            class="bg-gray-900 border border-gray-700 rounded w-full py-3 px-4 text-white leading-tight focus:outline-none focus:border-blue-500">
                     </div>
                     <div class="mb-4">
-                        <label for="email" class="block text-gray-400 text-sm font-bold mb-2">Email</label>
-                        <input type="email" id="email" class="bg-gray-900 border border-gray-700 rounded w-full py-3 px-4 text-white leading-tight focus:outline-none focus:border-blue-500">
+                        <label for="email" class="block text-gray-400 text-sm font-bold mb-2" name="email">Email</label>
+                        <input type="email" id="email"
+                            class="bg-gray-900 border border-gray-700 rounded w-full py-3 px-4 text-white leading-tight focus:outline-none focus:border-blue-500">
                     </div>
                     <div class="mb-4">
-                        <label for="message" class="block text-gray-400 text-sm font-bold mb-2">Message</label>
-                        <textarea id="message" rows="4" class="bg-gray-900 border border-gray-700 rounded w-full py-3 px-4 text-white leading-tight focus:outline-none focus:border-blue-500"></textarea>
+                        <label for="message" class="block text-gray-400 text-sm font-bold mb-2" name="message">Message</label>
+                        <textarea id="message" rows="4"
+                            class="bg-gray-900 border border-gray-700 rounded w-full py-3 px-4 text-white leading-tight focus:outline-none focus:border-blue-500"></textarea>
                     </div>
                     <input type="text" name="_honey" style="display:none">
                     <div class="text-center">
-                        <button class="bg-blue-600 text-white font-bold rounded-full hover:bg-blue-500 focus:outline-none focus:bg-blue-500 px-8 py-3">
+                        <button
+                            class="bg-blue-600 text-white font-bold rounded-full hover:bg-blue-500 focus:outline-none focus:bg-blue-500 px-8 py-3">
                             Send Message
                         </button>
                     </div>
@@ -252,7 +293,7 @@
     <footer class="bg-black text-white py-8">
         <div class="container mx-auto px-6 text-center text-gray-500">
             <p>&copy; 2025 BuildBasket. All rights reserved.</p>
-             <div class="flex justify-center space-x-4 mt-4">
+            <div class="flex justify-center space-x-4 mt-4">
                 <a href="#" class="text-gray-500 hover:text-white">Facebook</a>
                 <a href="#" class="text-gray-500 hover:text-white">Instagram</a>
                 <a href="#" class="text-gray-500 hover:text-white">Twitter</a>
@@ -288,7 +329,7 @@
 
             if (scrollPosition > stickyPosition && scrollPosition < stickyPosition + stickyHeight - window.innerHeight) {
                 const progress = (scrollPosition - stickyPosition) / (stickyHeight - window.innerHeight);
-                
+
                 // Animate the second image sliding in from the right
                 productImage2.style.transform = `translateX(${100 - (progress * 100)}%)`;
                 productImage2.style.opacity = 1;
@@ -344,4 +385,5 @@
     </script>
 
 </body>
+
 </html>
